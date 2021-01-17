@@ -1,0 +1,265 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Design;
+
+import Main.Librarian;
+import java.awt.Color;
+import java.awt.Font;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+
+/**
+ *
+ * @author Çağrı
+ */
+public class ViewBook extends javax.swing.JFrame {
+
+    /**
+     * Creates new form ViewBook
+     */
+    DefaultTableModel borrowTable = null;
+    DefaultTableModel returnTable = null;
+    Object [] borrowData = null;
+    Object [] returnData = null;
+    Librarian lib = new Librarian();
+    JTableHeader header = null;
+    
+    private void backGround(){
+        jScrollPane1.getViewport().setBackground(new Color(241,242,246));
+        jScrollPane2.getViewport().setBackground(new Color(241,242,246));
+        
+    }
+    
+    private void colFont1(){
+        header = table_viewBorrowBook.getTableHeader();
+        header.setFont(new Font("Segoe UI", Font.BOLD, 15) {
+        });
+    }
+    
+    private void colFont2(){
+        header = table_viewReturnBook.getTableHeader();
+        header.setFont(new Font("Segoe UI", Font.BOLD, 15) {
+        });
+    }
+    
+    public void borrowListed() throws SQLException{
+        borrowTable = (DefaultTableModel) table_viewBorrowBook.getModel();
+        
+        Object [] colName = new Object[10];
+         colName [0] = "Kullanıcı ID";
+         colName [1] = "Kullanıcı Ad";
+         colName [2] = "Kullanıcı Soyad";
+         colName [3] = "Kitap ID";
+         colName [4] = "Kitap Adı";
+         colName [5] = "Kitap Yazarı";
+         colName [6] = "ISBN";
+         colName [7] = "Yayınevi";
+         colName [8] = "Sayfa Sayısı";
+         colName [9] = "Ödünç Tarihi";
+         borrowTable.setColumnIdentifiers(colName);
+         borrowData = new Object[10];
+         for (int i = 0; i < lib.getBorrowList().size(); i++){
+             
+             borrowData [0] = lib.getBorrowList().get(i).getMemberID();
+             borrowData [1] = lib.getBorrowList().get(i).getFirstName();
+             borrowData [2] = lib.getBorrowList().get(i).getLastName();
+             borrowData [3] = lib.getBorrowList().get(i).getBookID();
+             borrowData [4] = lib.getBorrowList().get(i).getBookTitle();
+             borrowData [5] = lib.getBorrowList().get(i).getBookAuthor();
+             borrowData [6] = lib.getBorrowList().get(i).getBookISBN();
+             borrowData [7] = lib.getBorrowList().get(i).getBookPublisher();
+             borrowData [8] = lib.getBorrowList().get(i).getBookPage();
+             borrowData [9] = lib.getBorrowList().get(i).getIssueDate();
+             borrowTable.addRow(borrowData);
+         }
+    }
+    
+    public void returnListed() throws SQLException{
+        returnTable = (DefaultTableModel) table_viewReturnBook.getModel();
+        
+        Object [] colName = new Object[11];
+         colName [0] = "Kullanıcı ID";
+         colName [1] = "Kullanıcı Ad";
+         colName [2] = "Kullanıcı Soyad";
+         colName [3] = "Kitap ID";
+         colName [4] = "Kitap Adı";
+         colName [5] = "Kitap Yazarı";
+         colName [6] = "ISBN";
+         colName [7] = "Yayınevi";
+         colName [8] = "Sayfa Sayısı";
+         colName [9] = "Ödünç Tarihi";
+         colName [10] = "İade Tarihi";
+         returnTable.setColumnIdentifiers(colName);
+         returnData = new Object[11];
+         for (int i = 0; i < lib.getReturnList().size(); i++){
+             
+             returnData [0] = lib.getReturnList().get(i).getMemberID();
+             returnData [1] = lib.getReturnList().get(i).getFirstName();
+             returnData [2] = lib.getReturnList().get(i).getLastName();
+             returnData [3] = lib.getReturnList().get(i).getBookID();
+             returnData [4] = lib.getReturnList().get(i).getBookTitle();
+             returnData [5] = lib.getReturnList().get(i).getBookAuthor();
+             returnData [6] = lib.getReturnList().get(i).getBookISBN();
+             returnData [7] = lib.getReturnList().get(i).getBookPublisher();
+             returnData [8] = lib.getReturnList().get(i).getBookPage();
+             returnData [9] = lib.getReturnList().get(i).getIssueDate();
+             returnData [10] = lib.getReturnList().get(i).getReturnDate();
+             
+             returnTable.addRow(returnData);
+         }
+    }
+    
+    public ViewBook() throws SQLException {
+        initComponents();
+        borrowListed();
+        returnListed();
+        table_viewBorrowBook.setRowHeight(25);
+        table_viewReturnBook.setRowHeight(25);
+        colFont1();
+        colFont2();
+        backGround();
+        
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        lbl_exit = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table_viewBorrowBook = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table_viewReturnBook = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(241, 242, 246));
+        jPanel1.setPreferredSize(new java.awt.Dimension(100, 45));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("ÖDÜNÇ ALINAN KİTAPLAR");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, -1, 45));
+
+        lbl_exit.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbl_exit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_exit.setText("X");
+        lbl_exit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_exitMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lbl_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 0, 50, 50));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 50));
+
+        table_viewBorrowBook.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        table_viewBorrowBook.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Kullanıcı ID", "Kullanıcı Ad", "Kullanıcı Soyad", "Kitap ID", "Kitap Adı", "Kitap Yazarı", "ISBN", "Yayınevi", "Sayfa Sayısı", "Ödünç Tarihi"
+            }
+        ));
+        jScrollPane1.setViewportView(table_viewBorrowBook);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 54, 1100, 227));
+
+        jPanel2.setBackground(new java.awt.Color(241, 242, 246));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("GERİ VERİLEN KİTAPLAR");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, 50));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 286, 1100, 70));
+
+        table_viewReturnBook.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        table_viewReturnBook.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Kullanıcı ID", "Kullanıcı Ad", "Kullanıcı Soyad", "Kitap ID", "Kitap Adı", "Kitap Yazarı", "ISBN", "Yayınevi", "Sayfa Sayısı", "Ödünç Tarihi", "İade Tarihi"
+            }
+        ));
+        jScrollPane2.setViewportView(table_viewReturnBook);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 355, 1100, 245));
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void lbl_exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_exitMouseClicked
+        dispose();
+    }//GEN-LAST:event_lbl_exitMouseClicked
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ViewBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ViewBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ViewBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ViewBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new ViewBook().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ViewBook.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbl_exit;
+    private javax.swing.JTable table_viewBorrowBook;
+    private javax.swing.JTable table_viewReturnBook;
+    // End of variables declaration//GEN-END:variables
+}

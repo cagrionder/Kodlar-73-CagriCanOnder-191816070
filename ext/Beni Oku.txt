@@ -1,0 +1,3 @@
+Veritabanın çalışması için "mysql-connector-java-8.0.22" projeye dahil edilmelidir.
+
+Takvim için "jcalendar-1.4" projeye dahil edilmelidir.  
